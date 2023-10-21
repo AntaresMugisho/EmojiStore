@@ -10,13 +10,13 @@ setup(
   author = 'Antares Mugisho',
   author_email = 'antaresmugisho@gmail.com',
   url = 'https://antaresmugisho.vercel.app/',
-  download_url = 'https://github.com/AntaresMugisho/EmojiStore/releases/tag/v1.0',
+  download_url = 'https://github.com/AntaresMugisho/EmojiStore/archive/refs/tags/v1.0-alpha.tar.gz',
   keywords = ['emoji', 'sticker', 'mood'],
   install_requires=[
           'beautifulsoup4',
       ],
   classifiers=[
-    'Development Status :: 5 - Production/Stable',
+    'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Build Tools',
     'License :: OSI Approved :: MIT License',
