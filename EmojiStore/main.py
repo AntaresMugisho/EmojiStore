@@ -1,10 +1,39 @@
+from datetime import datetime
 import os
 import requests
 import binascii
 from bs4 import BeautifulSoup
 
+EMOJI_URL = "https://www.webfx.com/tools/emoji-cheat-sheet/"
 
-def emojiconify(emoji_alias: str, data_uri: str):
+# The following categories are based on webfx categories
+# Modifying them can cause this script bugs
+
+CATEGORIES = [
+    "smileys_and_people",
+    "animals_and_nature",
+    "food_and_drink",
+    "travel_and_places",
+    "activities",
+    "objects",
+    "symbols",
+    "flags"
+]
+
+BANNER = f"""
+# This file uses the following encoding : utf-8
+# This file was generated automatically, don't edit it.
+# Last generated on {datetime.strftime(datetime.now(), "%Y-%m-%d @ %H:%M:%S")} 
+# All included emojis where extracted from https://www.webfx.com/tools/emoji-cheat-sheet
+
+from collections import namedtuple
+
+Emoji = namedtuple("Emoji", ["category", "emoji", "alias", "description", "unicode"])
+
+EmojiStore = [
+"""
+
+def iconify(emoji_alias: str, data_uri: str):
     """
     Save emoji icon file from data_uri
 
@@ -21,52 +50,62 @@ def emojiconify(emoji_alias: str, data_uri: str):
         file.write(binascii.a2b_base64(ascii_data))
 
 
-def scrap(html):
-    categories = ["smileys_and_people"] #, "animals_and_nature", "food_and_drink", "travel_and_places", "activities",
-                  # "objects", "symbols", "flags"]
+def generate_from(html):
+    """
+    Generate python file containing all Emoji List
+
+    :param html : the html file from which to extract emojis
+    """
 
     soup = BeautifulSoup(html, "html.parser")
     count = 0
 
-    for i, category in enumerate(categories):
-        print(f"{i+1} => {category.upper()}")
-        container = soup.select_one(f"div#{category}")
-        items = [container.select_one("div._item")]
+    with open("storage.py", "w") as file:
+        file.write(BANNER)
 
-        for j, item in enumerate(items):
-            description = item.get("data-alt-name")
+        for i, category in enumerate(CATEGORIES):
+            container: BeautifulSoup = soup.select_one(f"div#{category}")
+            items = container.select("div._item")
 
-            apple_emoji = item.select_one("div.apple.emojicon")
-            image = apple_emoji.select_one("img")
+            for j, item in enumerate(items):
+                count += 1
 
-            try:
-                emoji = image.get("alt")
-            except AttributeError:
-                google_emoji = item.select_one("div.google.emojicon")
-                image = google_emoji.select_one("img")
+                description = item.get("data-alt-name")
+                apple_emoji = item.select_one("div.apple.emojicon")
+                img = apple_emoji.select_one("img")
 
-            emoji = image.get("alt")
-            emojicon_data_uri = image.get("src")
-            alias = item.select_one("div.shortcode").text[1:-1]
-            unicode = item.select_one("div.unicode").text
+                # If apple emoji icon is not present, use google emoji icon
+                try:
+                    emoji = img.get("alt")
+                except AttributeError:
+                    google_emoji = item.select_one("div.google.emojicon")
+                    img = google_emoji.select_one("img")
+                    emoji = img.get("alt")
+                finally:
+                    emojicon_data_uri = img.get("src")
 
-            emojiconify(alias, emojicon_data_uri)
+                alias = item.select_one("div.shortcode").text[1:-1]
+                unicode = item.select_one("div.unicode").text.split(" ")
 
-            count+= 1
+                file.write(f"\tEmoji('{category}', '{emoji}', '{alias}', '{description}', {unicode}),\n")
 
-            print(f"\t{i+1}.{j+1}=> Category: {category} Description: {description} Emoji: {emoji} Shortcode: {alias} Unicode: {unicode}")
-        print(f"# ENDS WITH {j+1} EMOJIS #-----------------------------\n")
+                # Save emoji icon in file
+                iconify(alias, emojicon_data_uri)
 
-    print(f"# TOTAL OF {count} EMOJIS FOUND #-----------------------------")
+            file.write(f"\n\t## » {j+1} Emojis found in {category} category « ##\n\n")
 
+        file.write("]")
+        file.write(f"\n## » Total of {count} Emojis found in all categories « ##\n")
 
 
 if __name__ == "__main__":
-    with open("../emoji.html", "r") as html:
-        scrap(html)
+    # try:
+    #     response = requests.get(EMOJI_URL)
+    #     html = response.text
+    # except requests.RequestException as e:
+    #     print(f"Request error : {e}")
+    # else:
+    #     generate_from(html)
 
-    # url = "https://www.webfx.com/tools/emoji-cheat-sheet/"
-    # response = requests.get(url)
-    # html = response.text
-    #
-    # scrap(html)
+    with open("../emoji.html", "r") as html:
+        generate_from(html)
