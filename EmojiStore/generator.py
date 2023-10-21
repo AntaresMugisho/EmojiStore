@@ -1,8 +1,10 @@
-from datetime import datetime
+# This file uses the following encoding : utf-8
+
 import os
 import requests
 import binascii
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 EMOJI_URL = "https://www.webfx.com/tools/emoji-cheat-sheet/"
 
@@ -30,7 +32,7 @@ from collections import namedtuple
 
 Emoji = namedtuple("Emoji", ["category", "emoji", "alias", "description", "unicode"])
 
-EmojiStore = [
+EmojiStorage = [
 """
 
 def iconify(emoji_alias: str, data_uri: str):
@@ -99,13 +101,10 @@ def generate_from(html):
 
 
 if __name__ == "__main__":
-    # try:
-    #     response = requests.get(EMOJI_URL)
-    #     html = response.text
-    # except requests.RequestException as e:
-    #     print(f"Request error : {e}")
-    # else:
-    #     generate_from(html)
-
-    with open("../emoji.html", "r") as html:
+    try:
+        response = requests.get(EMOJI_URL)
+        html = response.text
+    except requests.RequestException as e:
+        print(f"Request error : {e}")
+    else:
         generate_from(html)

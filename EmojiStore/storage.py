@@ -8,7 +8,7 @@ from collections import namedtuple
 
 Emoji = namedtuple("Emoji", ["category", "emoji", "alias", "description", "unicode"])
 
-EmojiStore = [
+EmojiStorage = [
 	Emoji('smileys_and_people', '😀', 'grinning_face', 'grinning face', ['U+1F600']),
 	Emoji('smileys_and_people', '😃', 'grinning_face_with_big_eyes', 'grinning face with big eyes', ['U+1F603']),
 	Emoji('smileys_and_people', '😄', 'grinning_face_with_smiling_eyes', 'grinning face with smiling eyes', ['U+1F604']),
