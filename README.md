@@ -52,8 +52,8 @@ grinning face
 ```
 
 ### Get emoji categories
-You can get all available categories by calling the `get_category()` method. 
-This method returns a set containing all categories :
+You can get all available categories by calling the `get_categories()` method. 
+This method returns a set of all categories :
 - smileys_and_people
 - animals_and_nature
 - food_and_drink
