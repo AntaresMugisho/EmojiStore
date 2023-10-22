@@ -10,16 +10,13 @@ setup(
     packages=['EmojiStore'],
     version='1.0',
     license='MIT',
-    description='A python package that stores all unicode emojis grouped by category !',
+    description='Free unicode emojis ready to use !',
     long_description=long_description,
     author='Antares Mugisho',
     author_email='antaresmugisho@gmail.com',
     url='https://antaresmugisho.vercel.app/',
     download_url='https://github.com/AntaresMugisho/EmojiStore/archive/refs/tags/v1.0-alpha.tar.gz',
     keywords=['python', 'emoji', 'sticker', 'mood'],
-    install_requires=[
-        'beautifulsoup4',
-    ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

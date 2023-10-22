@@ -6,7 +6,7 @@ import binascii
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-EMOJI_URL = "https://www.webfx.com/tools/emoji-cheat-sheet/"
+EMOJI_URL = "https://www.webfx.com/tools/emoji-cheat-sheet"
 
 # The following categories are based on webfx categories
 # Modifying them can cause this script bugs
