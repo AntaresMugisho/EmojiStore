@@ -15,7 +15,7 @@ setup(
     author='Antares Mugisho',
     author_email='antaresmugisho@gmail.com',
     url='https://antaresmugisho.vercel.app/',
-    download_url='https://github.com/AntaresMugisho/EmojiStore/archive/refs/tags/v1.0-alpha.tar.gz',
+    download_url='https://github.com/AntaresMugisho/EmojiStore/releases/tag/v1.0-beta',
     keywords=['python', 'emoji', 'sticker', 'mood'],
     classifiers=[
         'Development Status :: 3 - Alpha',

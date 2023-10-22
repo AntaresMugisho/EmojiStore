@@ -1,3 +1,6 @@
 /.gitignore
 /.idea
+/build
+/dist
+/*.egg-info
 /EmojiStore/emojicons
