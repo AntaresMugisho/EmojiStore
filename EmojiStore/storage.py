@@ -1,7 +1,7 @@
 
 # This file uses the following encoding : utf-8
 # This file was generated automatically, don't edit it.
-# Last generated on 2023-10-21 @ 19:54:58 
+# Last generated on 2023-10-22 @ 22:59:34 
 # All included emojis where extracted from https://www.webfx.com/tools/emoji-cheat-sheet
 
 from collections import namedtuple

@@ -45,7 +45,7 @@ def iconify(emoji_alias: str, data_uri: str):
     """
 
     extension = data_uri.partition("data:image/")[2].split(";")[0]
-    path = os.path.join("emojicons", f"{emoji_alias}.{extension}")
+    path = os.path.join("EmojiStore", "emojicons", f"{emoji_alias}.{extension}")
 
     ascii_data = data_uri.partition("base64,")[2]
 
@@ -63,7 +63,8 @@ def generate_from(html):
     soup = BeautifulSoup(html, "html.parser")
     count = 0
 
-    with open("storage.py", "w") as file:
+    storage_file = os.path.join("EmojiStore", "storage.py")
+    with open(storage_file, "w") as file:
         file.write(BANNER)
 
         for i, category in enumerate(CATEGORIES):
