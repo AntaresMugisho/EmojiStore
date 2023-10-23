@@ -5,11 +5,15 @@ This package contains a total of 1851 emojis grouped in 8 categories.
 # Installation
 Install with pip
 
-`pip install EmojiStore`
+```commandline
+pip install EmojiStore
+```
 
 or
 
-`pip3 install EmojiStore`
+```commandline
+pip3 install EmojiStore
+```
 
 # Usage
 It all starts by importing the package
@@ -76,8 +80,6 @@ Output :
 ### Get all emojis from a specific category
 
 ```python
-import EmojiStore
-
 smileys = EmojiStore.get_by_category("smileys_and_people")
 ```
 
