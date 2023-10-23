@@ -1,6 +1,6 @@
 # This file uses the following encoding : utf-8
 
-from distutils.core import setup
+from setuptools import setup
 
 with open("README.md", "r") as file:
     long_description = file.read()
@@ -8,7 +8,7 @@ with open("README.md", "r") as file:
 setup(
     name='EmojiStore',
     packages=['EmojiStore'],
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     description='Free unicode emojis ready to use !',
     long_description=long_description,
@@ -16,7 +16,7 @@ setup(
     author='Antares Mugisho',
     author_email='antaresmugisho@gmail.com',
     url='https://antaresmugisho.vercel.app/',
-    download_url='https://github.com/AntaresMugisho/EmojiStore/releases/tag/v1.0-beta',
+    download_url='https://github.com/AntaresMugisho/EmojiStore/archive/refs/tags/v1.0-beta.tar.gz',
     keywords=['python', 'emoji', 'sticker', 'mood'],
     classifiers=[
         'Development Status :: 4 - Beta',
